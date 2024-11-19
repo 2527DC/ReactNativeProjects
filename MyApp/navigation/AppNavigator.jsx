@@ -12,7 +12,7 @@ import ScheduleBookingScreen from '../screens/ScheduleBookingScreen';
 import LogoutScreen from '../screens/LogoutScreen';
 
 const Stack = createStackNavigator();
-const Drawer = createDrawerNavigator();
+const Drawer = createDrawerNavigator(); 
 
 function DrawerNavigator() {
   return (
