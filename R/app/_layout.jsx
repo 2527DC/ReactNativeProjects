@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
  // Import SplashScreen module
 import { Slot, Stack } from 'expo-router';
+import { AppProvider } from '../context/AppContext';
 
 const RootLayout = () => {
   useEffect(() => {
@@ -24,7 +25,10 @@ const RootLayout = () => {
   }, []);
 
   return (
-   <Slot/>
+    <AppProvider>
+<Slot/>
+    </AppProvider> 
+   
   );
 };
 

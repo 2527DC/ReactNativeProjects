@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { Link, useRouter } from 'expo-router'; // Import useRouter
+import { useAppContext } from '../context/AppContext';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -8,6 +9,7 @@ const Login = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const router = useRouter(); // Initialize the router
   
+ 
   const handleLogin = () => {
     console.log('Navigating to DrawerNavigator');
     router.replace('/navigation/DrawerNavigator');
