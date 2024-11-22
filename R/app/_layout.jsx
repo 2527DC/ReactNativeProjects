@@ -26,7 +26,7 @@ const RootLayout = () => {
 
   return (
     <AppProvider>
-<Slot/>
+      <Slot/>
     </AppProvider> 
    
   );

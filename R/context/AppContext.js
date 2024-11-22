@@ -1,32 +1,69 @@
-// AppContext.js or Context.js
-
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
 // Create Context
 const AppContext = createContext();
 
-// Create a custom hook to use the context
+// Custom hook to use the context
 export const useAppContext = () => {
   return useContext(AppContext);
 };
 
 // Create a provider component
 export const AppProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [theme, setTheme] = useState('light');
+  // State to store user data
+  const [userData, setUserData] = useState({
+    api_token: '',
+    emailid: '',
+    user_name: '',
+    phone: '',
+    phone_code: '',
+    gender: '',
+    address: '',
+    user_id: '',
+  });
 
-  // A function to update user info
-  const updateUser = (newUser) => {
-    setUser(newUser);
+  // Method to update specific user data field
+  const updateUserData = (key, value) => {
+    setUserData((prev) => ({
+      ...prev,
+      [key]: value, // Update only the specified key
+    }));
   };
 
-  // A function to toggle theme
-  const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+  // Method to set all user data at once
+  const setAllUserData = (data) => {
+    setUserData(data);
+  };
+
+  // Method to get a specific field value
+  const getUserData = (key) => {
+    return userData[key] || null; // Return the value or null if not found
+  };
+
+  // Method to clear user data
+  const clearUserData = () => {
+    setUserData({
+      api_token: '',
+      emailid: '',
+      user_name: '',
+      phone: '',
+      phone_code: '',
+      gender: '',
+      address: '',
+      user_id: '',
+    });
   };
 
   return (
-    <AppContext.Provider value={{ user, theme, updateUser, toggleTheme }}>
+    <AppContext.Provider
+      value={{
+        userData,
+        updateUserData,
+        setAllUserData,
+        getUserData,
+        clearUserData,
+      }}
+    >
       {children}
     </AppContext.Provider>
   );

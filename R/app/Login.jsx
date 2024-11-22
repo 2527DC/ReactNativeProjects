@@ -3,6 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 import { Link, useRouter } from 'expo-router';
 import axios from 'axios'; // Import Axios
 import API_ENDPOINTS from '../constants/apiEndpoints';
+import { useAppContext } from '../context/AppContext';
 
 
 const Login = () => {
@@ -11,35 +12,56 @@ const Login = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const router = useRouter();
 
+  const { setAllUserData } = useAppContext(); // Access the setAllUserData method from the context
+
   // Function to handle login
   const handleLogin = async () => {
-    try {
-      // Prepare login data
-      const loginData = {
-        username: email,
-        password: password,
-      };
 
-      // Send POST request to login endpoint
-      const response = await axios.post(API_ENDPOINTS.LOGIN, loginData, {
-        headers: {
-          'Content-Type': 'application/json', // Ensures the data is sent as JSON
-        },
-      });
+      // Navigate to the DrawerNavigator on successful login
+      router.replace('/navigation/DrawerNavigator');
+    // try {
+    //   // Prepare login data
+    //   const loginData = {
+    //     username: email,
+    //     password: password,
+    //   };
 
-      // Handle the successful login response
-      if (response.data.success) {
-        console.log('Login successful:', response.data);
-        // Navigate to the DrawerNavigator on successful login
-        router.replace('/navigation/DrawerNavigator');
-      } else {
-        // Show error message if login failed
-        Alert.alert('Login Failed', response.data.message || 'An error occurred');
-      }
-    } catch (error) {
-      console.error('Login error:', error);
-      Alert.alert('Login Failed', 'An error occurred while logging in.');
-    }
+    //   // Send POST request to login endpoint
+    //   const response = await axios.post(API_ENDPOINTS.LOGIN, loginData, {
+    //     headers: {
+    //       'Content-Type': 'application/json', // Ensures the data is sent as JSON
+    //     },
+    //   });
+
+    //   // Handle the successful login response
+    //   if (response.data.success) {
+    //     console.log('Login successful:', response.data);
+
+    //     // Extract user information from the response
+    //     const userInfo = response.data.data.userinfo;
+
+    //     // Save the user data in the context
+    //     setAllUserData({
+    //       api_token: userInfo.api_token,
+    //       emailid: userInfo.emailid,
+    //       user_name: userInfo.user_name,
+    //       phone: userInfo.phone,
+    //       phone_code: userInfo.phone_code,
+    //       gender: userInfo.gender,
+    //       address: userInfo.address,
+    //       user_id: userInfo.user_id,
+    //     });
+
+    //     // Navigate to the DrawerNavigator on successful login
+    //     router.replace('/navigation/DrawerNavigator');
+    //   } else {
+    //     // Show error message if login failed
+    //     Alert.alert('Login Failed', response.data.message || 'An error occurred');
+    //   }
+    // } catch (error) {
+    //   console.error('Login error:', error);
+    //   Alert.alert('Login Failed', 'An error occurred while logging in.');
+    // }
   };
 
   return (

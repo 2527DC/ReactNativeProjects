@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { Picker } from '@react-native-picker/picker'; // Import Picker
 import CountryPicker from 'react-native-country-picker-modal'; // Import CountryPicker
+import { useAppContext } from '../context/AppContext';
 
 const Register = () => {
   const [username, setUsername] = useState('');
@@ -12,8 +13,14 @@ const Register = () => {
   const [gender, setGender] = useState(''); // Gender state
   const [countryCode, setCountryCode] = useState('91'); // Default country code for India
   const [cca2, setCca2] = useState('IN'); // Default country cca2 code for India
+  const { getUserData } = useAppContext();
 
   const handleRegister = () => {
+
+    const email = getUserData('emailid');
+
+    console.log('the saved email is ', email);
+
     if (!username || !email || !password || !confirmPassword || !phone || !gender || !countryCode) {
       alert("All fields are required.");
       return;
