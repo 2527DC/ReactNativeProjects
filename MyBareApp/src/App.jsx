@@ -8,12 +8,14 @@ import ForgotPasswordScreen from './screens/ForgotPasswordScreen';
 import '../global.css';
 import SplashScreen from './SplashScreen';
 import MyDrawer from './MyDrawer';
+import { AppProvider } from './Store/AppContext';
 
 const Stack = createNativeStackNavigator();
 
 
 const App = () => {
   return (
+    <AppProvider>
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Splash">
         <Stack.Screen 
@@ -31,6 +33,7 @@ const App = () => {
         />
       </Stack.Navigator>
     </NavigationContainer>
+    </AppProvider>
   );
 };
 
